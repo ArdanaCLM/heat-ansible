@@ -18,7 +18,7 @@
 #}
 # heat-api pipeline
 [pipeline:heat-api]
-pipeline = request_id faultwrap ssl versionnegotiation osprofiler authurl authtoken context {%- if heat_audit_enable|bool %} audit{% endif %} apiv1app
+pipeline = request_id faultwrap ssl versionnegotiation osprofiler authurl authtoken {%- if heat_audit_enable|bool %} audit{% endif %} context apiv1app
 
 # heat-api pipeline for standalone heat
 # ie. uses alternative auth backend that authenticates users against keystone
@@ -41,7 +41,7 @@ pipeline = request_id faultwrap versionnegotiation context custombackendauth api
 
 # heat-api-cfn pipeline
 [pipeline:heat-api-cfn]
-pipeline = cfnversionnegotiation osprofiler ec2authtoken authtoken context {%- if heat_audit_enable|bool %} audit{% endif %} apicfnv1app
+pipeline = cfnversionnegotiation osprofiler ec2authtoken authtoken {%- if heat_audit_enable|bool %} audit{% endif %} context apicfnv1app
 
 # heat-api-cfn pipeline for standalone heat
 # relies exclusively on authenticating with ec2 signed requests
@@ -50,7 +50,7 @@ pipeline = cfnversionnegotiation ec2authtoken context apicfnv1app
 
 # heat-api-cloudwatch pipeline
 [pipeline:heat-api-cloudwatch]
-pipeline = versionnegotiation osprofiler ec2authtoken authtoken context {%- if heat_audit_enable|bool %} audit{% endif %} apicwapp
+pipeline = versionnegotiation osprofiler ec2authtoken authtoken {%- if heat_audit_enable|bool %} audit{% endif %} context apicwapp
 
 # heat-api-cloudwatch pipeline for standalone heat
 # relies exclusively on authenticating with ec2 signed requests
