@@ -1,0 +1,3 @@
+.copyrightignore
+roles/heat-common/files/heat_api_audit_map.conf
+roles/heat-common/files/policy.json
