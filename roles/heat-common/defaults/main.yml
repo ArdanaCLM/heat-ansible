@@ -75,7 +75,7 @@ heat_encrypt_parameters_and_properties: "True"
 
 ## [database]
 heat_database_connection: >
-  {{ 'mysql://' ~ HEA_ENG.consumes_FND_MDB.vars.accounts.heat.username ~ ':' ~
+  {{ 'mysql+pymysql://' ~ HEA_ENG.consumes_FND_MDB.vars.accounts.heat.username ~ ':' ~
      HEA_ENG.consumes_FND_MDB.vars.accounts.heat.password | urlencode ~ '@' ~
      HEA_ENG.consumes_FND_MDB.vips.private[0].host ~ '/heat?charset=utf8' }}{{ heat_db_ssl }}
 
