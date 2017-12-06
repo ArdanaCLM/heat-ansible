@@ -44,7 +44,6 @@ heat_log_location: "/var/log/heat"
 
 # heat.conf config options
 ## [DEFAULT]
-heat_verbose: "True"
 heat_debug: "True"
 heat_region_name_for_services: "{{ HEA_API.advertises.vips.public[0].region_name }}"
 heat_auth_encryption_key: "040b67e76d211aaa326db524bc026666"
@@ -67,7 +66,7 @@ heat_rabbit_password: "{{ HEA.consumes_FND_RMQ.vars.accounts.heat.password }}"
 _heat_rabbit_hosts_list: >
   {{ HEA_API | item('consumes_FND_RMQ.members.private',
      default=( HEA_API | item('consumes_FND_RMQ.members.public') )) }}
-heat_rabbit_hosts: "{% for x in _heat_rabbit_hosts_list %}{{ x.host }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
+heat_rabbit_hosts: "{% for x in _heat_rabbit_hosts_list %}{{ heat_rabbit_userid }}:{{ heat_rabbit_password }}@{{ x.host }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
 heat_rabbit_use_ssl: "{{ HEA.consumes_FND_RMQ.members.private[0].use_tls }}"
 heat_notification_topic: "notifications"
 heat_notification_driver: "messaging"
@@ -81,12 +80,18 @@ heat_database_connection: >
      HEA_ENG.consumes_FND_MDB.vips.private[0].host ~ '/heat?charset=utf8' }}{{ heat_db_ssl }}
 
 ## [keystone_authtoken]
-heat_keystone_admin_tenant_name: "{{ KEY_API.vars.keystone_service_tenant }}"
+heat_keystone_admin_project_name: "{{ KEY_API.vars.keystone_service_tenant }}"
 heat_keystone_admin_password: "{{ HEA_API.consumes_KEY_API.vars.keystone_heat_password | quote }}"
 heat_keystone_admin_user: "{{ HEA_API.consumes_KEY_API.vars.keystone_heat_user }}"
+heat_keystone_admin_user_domain_id: "{{ KEY_API.vars.keystone_default_domain }}"
+heat_keystone_admin_project_domain_id: "{{ KEY_API.vars.keystone_default_domain }}"
+service_token_roles: "{{KEY_API.vars.keystone_service_role}}"
 
-heat_keystone_auth_uri: "{{ HEA_API.consumes_KEY_API.vips.private[0].url }}/v2.0"
-heat_keystone_identity_uri: "{{ HEA_API.consumes_KEY_API.vips.private[0].url }}"
+heat_keystone_auth_uri: "{{ HEA_API.consumes_KEY_API.vips.private[0].url }}/v3"
+heat_keystone_auth_url: "{{ HEA_API.consumes_KEY_API.vips.private[0].url }}"
+
+memcached_servers: "{% for x in HEA.consumes_FND_MEM.members.private %}{{ x.host }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
+memcache_secret_key: "{{ HEA.consumes_FND_MEM.vars.memcached.heat.secret_key | quote }}"
 
 ## [ec2authtoken]
 heat_ec2_auth_uri: >
