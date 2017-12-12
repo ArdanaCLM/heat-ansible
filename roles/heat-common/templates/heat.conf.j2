@@ -534,7 +534,7 @@ notification_topic = {{ heat_notification_topic }}
 endpoint_type = {{ heat_endpoint_type }}
 
 # Optional CA cert file to use in SSL connections. (string value)
-#ca_file = <None>
+ca_file = {{ heat_ca_file }}
 
 # Optional PEM-formatted certificate chain file. (string value)
 #cert_file = <None>
@@ -1375,7 +1375,7 @@ auth_uri = {{ heat_keystone_auth_uri }}
 
 # A PEM encoded Certificate Authority to use when verifying HTTPs connections.
 # Defaults to system CAs. (string value)
-#cafile = <None>
+cafile = {{ heat_ca_file }}
 
 # Verify HTTPS connections. (boolean value)
 #insecure = false
