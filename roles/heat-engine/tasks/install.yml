@@ -55,6 +55,7 @@
 - name: heat-engine | install | copy docker resource plugin to plugins directory
   become: yes
   command: cp -r {{ heat_docker_plugin_source_dir }} {{ heat_plugins_dir }}
+  when: deployer_media_legacy_layout|bool
 
 - name: heat-engine | install | set correct permission for resource plugins
   become: yes
@@ -65,3 +66,4 @@
     mode: 0755
     recurse: yes
     state: directory
+  when: deployer_media_legacy_layout|bool
