@@ -18,6 +18,7 @@
 
 heat_system_user: heat
 heat_system_group: heat
+heat_home_dir: /var/lib/heat
 
 heat_log_file_location: /var/log/heat
 
