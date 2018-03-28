@@ -118,5 +118,5 @@ heat_api_paste_config_path: "{{ heat_service_conf_dir }}/api-paste.ini"
 heat_endpoint_type: "internalURL"
 
 ## [ssl]
-heat_ca_file: "/etc/ssl/certs/ca-certificates.crt"
+heat_ca_file: "{{ trusted_ca_bundle }}"
 heat_db_ssl: "{% if HEA_ENG.consumes_FND_MDB.vips.private[0].use_tls %}&ssl_ca={{ heat_ca_file }} {% endif %}"
