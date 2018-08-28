@@ -96,7 +96,7 @@ memcache_secret_key: "{{ HEA.consumes_FND_MEM.vars.memcached.heat.secret_key | q
 
 ## [ec2authtoken]
 heat_ec2_auth_uri: >
-  {{ HEA_API.consumes_KEY_API.vips.private[0].url }}/v2.0
+  {{ HEA_API.consumes_KEY_API.vips.private[0].url }}/v3
 
 ## [heat_api]
 heat_api_workers: "2"
