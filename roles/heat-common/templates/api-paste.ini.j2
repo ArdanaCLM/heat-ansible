@@ -18,7 +18,7 @@
 #}
 # heat-api pipeline
 [pipeline:heat-api]
-pipeline = request_id faultwrap ssl versionnegotiation osprofiler authurl authtoken {%- if heat_audit_enable|bool %} audit{% endif %} context apiv1app
+pipeline = request_id faultwrap http_proxy_to_wsgi versionnegotiation osprofiler authurl authtoken {%- if heat_audit_enable|bool %} audit{% endif %} context apiv1app
 
 # heat-api pipeline for standalone heat
 # ie. uses alternative auth backend that authenticates users against keystone
@@ -29,7 +29,7 @@ pipeline = request_id faultwrap ssl versionnegotiation osprofiler authurl authto
 #   flavor = standalone
 #
 [pipeline:heat-api-standalone]
-pipeline = request_id faultwrap ssl versionnegotiation authurl authpassword context apiv1app
+pipeline = request_id faultwrap http_proxy_to_wsgi versionnegotiation authurl authpassword context apiv1app
 
 # heat-api pipeline for custom cloud backends
 # i.e. in heat.conf:
@@ -48,15 +48,6 @@ pipeline = cfnversionnegotiation osprofiler ec2authtoken authtoken {%- if heat_a
 [pipeline:heat-api-cfn-standalone]
 pipeline = cfnversionnegotiation ec2authtoken context apicfnv1app
 
-# heat-api-cloudwatch pipeline
-[pipeline:heat-api-cloudwatch]
-pipeline = versionnegotiation osprofiler ec2authtoken authtoken {%- if heat_audit_enable|bool %} audit{% endif %} context apicwapp
-
-# heat-api-cloudwatch pipeline for standalone heat
-# relies exclusively on authenticating with ec2 signed requests
-[pipeline:heat-api-cloudwatch-standalone]
-pipeline = versionnegotiation ec2authtoken context apicwapp
-
 [app:apiv1app]
 paste.app_factory = heat.common.wsgi:app_factory
 heat.app_factory = heat.api.openstack.v1:API
@@ -64,10 +55,6 @@ heat.app_factory = heat.api.openstack.v1:API
 [app:apicfnv1app]
 paste.app_factory = heat.common.wsgi:app_factory
 heat.app_factory = heat.api.cfn.v1:API
-
-[app:apicwapp]
-paste.app_factory = heat.common.wsgi:app_factory
-heat.app_factory = heat.api.cloudwatch:API
 
 [filter:versionnegotiation]
 paste.filter_factory = heat.common.wsgi:filter_factory
@@ -83,7 +70,6 @@ heat.filter_factory = heat.api.cfn:version_negotiation_filter
 
 [filter:cwversionnegotiation]
 paste.filter_factory = heat.common.wsgi:filter_factory
-heat.filter_factory = heat.api.cloudwatch:version_negotiation_filter
 
 [filter:context]
 paste.filter_factory = heat.common.context:ContextMiddleware_filter_factory
@@ -91,9 +77,8 @@ paste.filter_factory = heat.common.context:ContextMiddleware_filter_factory
 [filter:ec2authtoken]
 paste.filter_factory = heat.api.aws.ec2token:EC2Token_filter_factory
 
-[filter:ssl]
-paste.filter_factory = heat.common.wsgi:filter_factory
-heat.filter_factory = heat.api.openstack:sslmiddleware_filter
+[filter:http_proxy_to_wsgi]
+paste.filter_factory = oslo_middleware:HTTPProxyToWSGI.factory
 
 # Middleware to set auth_url header appropriately
 [filter:authurl]
