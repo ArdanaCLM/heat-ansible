@@ -30,13 +30,6 @@
   tasks:
   - include: roles/heat-api-cfn/tasks/status.yml
 
-- hosts: HEA-ACW
-  max_fail_percentage: 0
-  roles:
-  - heat-api-cloudwatch
-  tasks:
-  - include: roles/heat-api-cloudwatch/tasks/status.yml
-
 - hosts: HEA-ENG
   max_fail_percentage: 0
   roles:
