@@ -16,7 +16,7 @@
 #
 ---
 
-- hosts: HEA-API:HEA-ACF:HEA-ACW:HEA-ENG:&MON-AGN
+- hosts: HEA-API:HEA-ACF:HEA-ENG:&MON-AGN
   roles:
     - heat-monitoring
   tasks:
@@ -37,9 +37,3 @@
     # set-up monitoring of heat-api-cfn local endpoint and internal VIP
     - include: roles/heat-monitoring/tasks/heat_api_cfn_check.yml
 
-- hosts: HEA-ACW:&MON-AGN
-  roles:
-    - heat-monitoring
-  tasks:
-    # set-up monitoring of heat-api-cloudwatch local endpoint and internal VIP
-    - include: roles/heat-monitoring/tasks/heat_api_cloudwatch_check.yml

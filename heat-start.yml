@@ -28,12 +28,6 @@
   tasks:
   - include: roles/heat-api-cfn/tasks/start.yml
 
-- hosts: HEA-ACW
-  roles:
-  - heat-api-cloudwatch
-  tasks:
-  - include: roles/heat-api-cloudwatch/tasks/start.yml
-
 - hosts: HEA-ENG
   roles:
   - heat-engine

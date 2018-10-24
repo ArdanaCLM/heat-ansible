@@ -23,8 +23,6 @@ symlinks:
   "heat/api-logging.conf.j2": "roles/heat-api/templates/api-logging.conf.j2"
   "heat/api-cfn.conf.j2": "roles/heat-api-cfn/templates/api-cfn.conf.j2"
   "heat/api-cfn-logging.conf.j2": "roles/heat-api-cfn/templates/api-cfn-logging.conf.j2"
-  "heat/api-cloudwatch.conf.j2": "roles/heat-api-cloudwatch/templates/api-cloudwatch.conf.j2"
-  "heat/api-cloudwatch-logging.conf.j2": "roles/heat-api-cloudwatch/templates/api-cloudwatch-logging.conf.j2"
   "heat/engine.conf.j2": "roles/heat-engine/templates/engine.conf.j2"
   "heat/engine-logging.conf.j2": "roles/heat-engine/templates/engine-logging.conf.j2"
   "heat/heat.conf.j2": "roles/heat-common/templates/heat.conf.j2"

@@ -49,10 +49,6 @@ heat_debug: "True"
 heat_region_name_for_services: "{{ HEA_API.advertises.vips.public[0].region_name }}"
 heat_auth_encryption_key: "040b67e76d211aaa326db524bc026666"
 
-heat_watch_server_url: >
-  {{ HEA_ACW | item('advertises.vips.public[0].url',
-     default='http://' ~ HEA_ACW.advertises.vips.public[0].host ~ ':'
-             ~ HEA_ACW.advertises.vips.public[0].port) }}
 heat_waitcondition_server_url: >
   {{ HEA_ACF | item('advertises.vips.public[0].url',
      default='http://' ~ HEA_ACF.advertises.vips.public[0].host ~ ':'
@@ -106,10 +102,6 @@ heat_api_bind_host: >
 ## [heat_api_cfn]
 heat_api_cfn_bind_host: >
   {{ host | item('bind.HEA_ACF.internal.ip_address') }}
-
-## [heat_api_cloudwatch]
-heat_api_cloudwatch_bind_host: >
-  {{ host | item('bind.HEA_ACW.internal.ip_address') }}
 
 ## [paste_deploy]
 heat_api_paste_config_path: "{{ heat_service_conf_dir }}/api-paste.ini"

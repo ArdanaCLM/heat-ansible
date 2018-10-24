@@ -18,18 +18,6 @@
     "cloudformation:DescribeStackResources": "rule:deny_stack_user",
     "cloudformation:ListStackResources": "rule:deny_stack_user",
 
-    "cloudwatch:DeleteAlarms": "rule:deny_stack_user",
-    "cloudwatch:DescribeAlarmHistory": "rule:deny_stack_user",
-    "cloudwatch:DescribeAlarms": "rule:deny_stack_user",
-    "cloudwatch:DescribeAlarmsForMetric": "rule:deny_stack_user",
-    "cloudwatch:DisableAlarmActions": "rule:deny_stack_user",
-    "cloudwatch:EnableAlarmActions": "rule:deny_stack_user",
-    "cloudwatch:GetMetricStatistics": "rule:deny_stack_user",
-    "cloudwatch:ListMetrics": "rule:deny_stack_user",
-    "cloudwatch:PutMetricAlarm": "rule:deny_stack_user",
-    "cloudwatch:PutMetricData": "",
-    "cloudwatch:SetAlarmState": "rule:deny_stack_user",
-
     "actions:action": "rule:deny_stack_user",
     "build_info:build_info": "rule:deny_stack_user",
     "events:index": "rule:deny_stack_user",
