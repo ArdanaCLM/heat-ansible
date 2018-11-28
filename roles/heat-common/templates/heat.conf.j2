@@ -1344,6 +1344,7 @@ bind_port = 8003
 # *not* be the same endpoint the service user utilizes  for validating tokens,
 # because normal end users may not be  able to reach that endpoint. (string
 # value)
+www_authenticate_uri = {{ heat_keystone_auth_uri }}
 auth_uri = {{ heat_keystone_auth_uri }}
 
 # API version of the admin Identity API endpoint. (string value)
@@ -2014,7 +2015,7 @@ ssl = {{ heat_rabbit_use_ssl }}
 
 # Whether the application is behind a proxy or not. This determines if the
 # middleware should parse the headers or not. (boolean value)
-#enable_proxy_headers_parsing = false
+enable_proxy_headers_parsing = True
 
 
 [oslo_policy]
