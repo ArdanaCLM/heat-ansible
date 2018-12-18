@@ -51,19 +51,3 @@
       --config-file={{ heat_service_conf_dir }}/engine.conf
 
 - include: ../../heat-common/tasks/install.yml
-
-- name: heat-engine | install | copy docker resource plugin to plugins directory
-  become: yes
-  command: cp -r {{ heat_docker_plugin_source_dir }} {{ heat_plugins_dir }}
-  when: deployer_media_legacy_layout|bool
-
-- name: heat-engine | install | set correct permission for resource plugins
-  become: yes
-  file:
-    path: "{{ heat_plugins_dir }}"
-    owner: "{{ heat_system_user }}"
-    group: "{{ heat_system_group }}"
-    mode: 0755
-    recurse: yes
-    state: directory
-  when: deployer_media_legacy_layout|bool
