@@ -47,7 +47,7 @@ heat_log_location: "/var/log/heat"
 ## [DEFAULT]
 heat_debug: "True"
 heat_region_name_for_services: "{{ HEA_API.advertises.vips.public[0].region_name }}"
-heat_auth_encryption_key: "040b67e76d211aaa326db524bc026666"
+heat_auth_encryption_key: "{{ HEA_ENG.vars.heat_auth_encryption_key }}"
 
 heat_waitcondition_server_url: >
   {{ HEA_ACF | item('advertises.vips.public[0].url',
