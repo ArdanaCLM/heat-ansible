@@ -88,7 +88,7 @@ heat_keystone_admin_user_domain_id: "{{ KEY_API.vars.keystone_default_domain }}"
 heat_keystone_admin_project_domain_id: "{{ KEY_API.vars.keystone_default_domain }}"
 service_token_roles: "{{KEY_API.vars.keystone_service_role}}"
 
-heat_keystone_auth_uri: "{{ KEY_API.advertises.vips.public[0].protocol }}://{{ KEY_API.advertises.vips.public[0].ip_address }}:{{ KEY_API.advertises.vips.public[0].port }}/v3"
+heat_keystone_auth_uri: "{{ KEY_API.advertises.vips.public[0].url }}/v3"
 heat_keystone_auth_url: "{{ HEA_API.consumes_KEY_API.vips.private[0].url }}"
 
 memcached_servers: "{% for x in HEA.consumes_FND_MEM.members.private %}{{ x.host }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
