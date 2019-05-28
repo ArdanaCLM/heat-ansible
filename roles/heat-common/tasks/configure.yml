@@ -20,7 +20,7 @@
     CPU based count is greater than {{ num_engine_max_workers }}
   set_fact:
     num_engine_worker_count: "{{ num_engine_max_workers }}"
-  when: num_engine_worker_count > num_engine_max_workers
+  when: num_engine_worker_count | int > num_engine_max_workers | int
 
 - include: _write_conf.yml
   src: "heat.conf.j2"

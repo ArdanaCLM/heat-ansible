@@ -33,7 +33,7 @@ num_engine_max_workers: 8
 
 # Number of num_engine_workers. The default will be the maximum allowed
 # by variable num_engine_max_workers
-num_engine_worker_count: "{{ [num_engine_max_workers, [2, ansible_processor_vcpus / 2] | max] | min }}"
+num_engine_worker_count: "{{ [num_engine_max_workers, [2, ansible_processor_vcpus / 2] | max] | min | int }}"
 
 # Audit
 heat_api_audit_config: "{{ heat_service_conf_dir }}/heat_api_audit_map.conf"
