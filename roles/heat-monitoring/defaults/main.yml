@@ -16,8 +16,8 @@
 #
 ---
 
-heat_api_local_url: 'http://{{ host.bind.HEA_API.internal.ip_address }}:{{ host.bind.HEA_API.internal.port }}'
-heat_api_cfn_local_url: 'http://{{ host.bind.HEA_ACF.internal.ip_address }}:{{ host.bind.HEA_ACF.internal.port }}'
+heat_api_local_url: 'http://{{ host.bind.HEA_API.internal.ip_address | ipwrap }}:{{ host.bind.HEA_API.internal.port }}'
+heat_api_cfn_local_url: 'http://{{ host.bind.HEA_ACF.internal.ip_address | ipwrap }}:{{ host.bind.HEA_ACF.internal.port }}'
 
 heat_api_internal_url: "{{ HEA_API.advertises.vips.private[0].url }}"
 heat_api_cfn_internal_url: "{{ HEA_ACF.advertises.vips.private[0].url }}"
